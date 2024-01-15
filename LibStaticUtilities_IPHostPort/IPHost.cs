@@ -9,22 +9,14 @@ namespace LibStaticUtilities_IPHostPort
 {
     public static class IPHost
     {
-        public static IPAddress UInt32ToIPAddress(UInt32 address)
-        {
-            return new IPAddress(new byte[] {
-                (byte)((address>>24) & 0xFF) ,
-                (byte)((address>>16) & 0xFF) ,
-                (byte)((address>>8)  & 0xFF) ,
-                (byte)( address & 0xFF)});
-        }
+        public static bool IsIPv4ValidFormat(string ip) => LibStaticUtilities_Regex.Regex.CheckValidIPv4(ip);
+        public static bool IsIPv4ValidFormat(IPAddress ip) => LibStaticUtilities_Regex.Regex.CheckValidIPv4(ip);
 
-        public static string[] GetIPAddressFromHost(string host)
+        public static string[] GetIPv4FromHost(string host)
         {
             List<string> ip = new List<string>();
-            if (LibStaticUtilities_Regex.Regex.CheckValidIP(host))
-            {
+            if (LibStaticUtilities_Regex.Regex.CheckValidIPv4(host))
                 ip.Add(host);
-            }
             else
             {
                 try
@@ -41,7 +33,6 @@ namespace LibStaticUtilities_IPHostPort
 
             return ip.ToArray();
         }
-
         public static List<string> GetAllLocalIPv4(NetworkInterfaceType type)
         {
             return NetworkInterface.GetAllNetworkInterfaces()
@@ -50,6 +41,15 @@ namespace LibStaticUtilities_IPHostPort
                            .Where(x => x.Address.AddressFamily == AddressFamily.InterNetwork)
                            .Select(x => x.Address.ToString())
                            .ToList();
+        }
+
+        public static IPAddress UInt32ToIPAddress(UInt32 address)
+        {
+            return new IPAddress(new byte[] {
+                (byte)((address>>24) & 0xFF) ,
+                (byte)((address>>16) & 0xFF) ,
+                (byte)((address>>8)  & 0xFF) ,
+                (byte)( address & 0xFF)});
         }
     }
 }
