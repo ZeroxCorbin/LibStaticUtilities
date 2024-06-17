@@ -13,7 +13,8 @@ namespace LibStaticUtilities_IPHostPort
         public const int MinPortNumber = 1025;
         public const int MaxPortNumber = 65535;
 
-        public static bool IsPortValid(int port) => LibStaticUtilities_Regex.Regex.CheckValidPort(port.ToString());
+        public static bool IsPortValid(uint port) => IsPortValid(port.ToString());
+        public static bool IsPortValid(int port) => IsPortValid(port.ToString());
         public static bool IsPortValid(string port)
         {
             if(!LibStaticUtilities_Regex.Regex.CheckValidPort(port))

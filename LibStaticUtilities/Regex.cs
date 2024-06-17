@@ -12,6 +12,7 @@ namespace LibStaticUtilities_Regex
             return regex.IsMatch(ip);
         }
 
+        public static bool CheckValidPort(uint port) => CheckValidPort(port.ToString());
         public static bool CheckValidPort(int port) => CheckValidPort(port.ToString());
         public static bool CheckValidPort(string port)
         {
