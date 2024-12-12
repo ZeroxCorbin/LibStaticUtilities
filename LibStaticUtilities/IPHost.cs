@@ -43,6 +43,16 @@ namespace LibStaticUtilities_IPHostPort
                            .ToList();
         }
 
+        public static List<string> GetAllLocalIPv4()
+        {
+            return NetworkInterface.GetAllNetworkInterfaces()
+                           .Where(x => x.OperationalStatus == OperationalStatus.Up)
+                           .SelectMany(x => x.GetIPProperties().UnicastAddresses)
+                           .Where(x => x.Address.AddressFamily == AddressFamily.InterNetwork)
+                           .Select(x => x.Address.ToString())
+                           .ToList();
+        }
+
         public static IPAddress UInt32ToIPAddress(UInt32 address)
         {
             return new IPAddress(new byte[] {
