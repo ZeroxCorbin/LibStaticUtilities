@@ -20,7 +20,7 @@ namespace LibStaticUtilities_IPHostPort
             if(!LibStaticUtilities_Regex.Regex.CheckValidPort(port))
                 return false;
 
-            int p = int.Parse(port);
+            var p = int.Parse(port);
             if (!(MinPortNumber <= p && p <= MaxPortNumber)) 
                return false;
 
@@ -51,7 +51,7 @@ namespace LibStaticUtilities_IPHostPort
             foreach( var listener in endPointsUdp)
                 availablePorts.Add(listener.Port);
 
-            foreach (int p in availablePorts)
+            foreach (var p in availablePorts)
                 if (p == port)
                     return false;
 
@@ -61,7 +61,7 @@ namespace LibStaticUtilities_IPHostPort
         public static int GetAvailablePort(string ip, int start = MinPortNumber) => GetAvailablePort(IPAddress.Parse(ip), start);
         public static int GetAvailablePort(IPAddress ip, int start = MinPortNumber)
         {
-            for (int i = start; i <= MaxPortNumber; i++)
+            for (var i = start; i <= MaxPortNumber; i++)
             {
                 if(IsPortAvailable(ip, i))
                     return i;

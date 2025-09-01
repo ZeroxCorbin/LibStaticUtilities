@@ -14,7 +14,7 @@ namespace LibStaticUtilities_IPHostPort
 
         public static string[] GetIPv4FromHost(string host)
         {
-            List<string> ip = new List<string>();
+            var ip = new List<string>();
             if (LibStaticUtilities_Regex.Regex.CheckValidIPv4(host))
                 ip.Add(host);
             else
