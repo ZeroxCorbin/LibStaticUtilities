@@ -13,8 +13,4 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="FileUtilities.cs" />
-  </ItemGroup>
-
 </Project>
